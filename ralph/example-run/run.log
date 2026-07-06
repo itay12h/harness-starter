@@ -1,0 +1,14 @@
+[2026-07-06 10:12:01] === Ralph loop started ===
+[2026-07-06 10:12:01] max_iter=8 | timeout=1800s per iteration
+[2026-07-06 10:12:01] --- Iteration 1 / 8 ---
+[2026-07-06 10:13:44] claude finished iteration 1
+[2026-07-06 10:13:44] git commit: iteration 1
+[2026-07-06 10:13:44] iteration 1 complete — not done yet.
+[2026-07-06 10:13:44] --- Iteration 2 / 8 ---
+[2026-07-06 10:15:12] claude finished iteration 2
+[2026-07-06 10:15:12] git commit: iteration 2
+[2026-07-06 10:15:12] iteration 2 complete — not done yet.
+[2026-07-06 10:15:12] --- Iteration 3 / 8 ---
+[2026-07-06 10:16:39] claude finished iteration 3
+[2026-07-06 10:16:39] git commit: iteration 3
+[2026-07-06 10:16:39] DONE.txt found — spec complete after 3 iteration(s).

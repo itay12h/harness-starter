@@ -24,10 +24,15 @@ Bring your own app; keep the `.claude/` + `ralph/` layer.
 │   ├── agents/               # code-reviewer sub-agent
 │   └── hooks/                # security · lint · stop-validation
 └── ralph/                    # the loop: run a spec to done, hands-off
-    ├── ralph.sh
+    ├── ralph.sh              # bash driver
+    ├── ralph.py              # python driver: worktree isolation + parallel runs
     ├── PROMPT.md
-    └── tasks.example.md
+    ├── tasks.example.md
+    └── example-run/          # a captured run to replay (demo insurance)
 ```
+
+`.claude/context/` ships template modules — `architecture` · `auth` · `testing`
+· `timezones` — so `CLAUDE.md` stays light and the deep stuff loads on demand.
 
 ### The two steering directions (feedforward + feedback)
 - **Feedforward — before it acts:** `CLAUDE.md`, `.claude/context/*`, and the
@@ -56,16 +61,22 @@ Then try the flow:
 ## Run the loop (Ralph)
 
 Hand it a spec and walk away. It works one task at a time with fresh context each
-round, and stops when it writes `DONE.txt` — or when it hits the hard cap.
+round, commits every step, and stops when it writes `DONE.txt` — or when it hits
+the hard cap.
 
 ```bash
 cp ralph/tasks.example.md ralph/tasks.md   # your task list
-bash ralph/ralph.sh 8                       # max 8 rounds — always cap it
+bash ralph/ralph.sh 8                       # bash · max 8 rounds — always cap it
+python3 ralph/ralph.py --max 8              # python · adds worktree + parallel
 ```
 
+For **isolated / parallel** runs, `ralph.py --worktree` gives each run its own git
+branch and working copy so you can launch several at once. A worked **captured
+run** lives in `ralph/example-run/` as demo insurance. Full docs: `ralph/README.md`.
+
 Three rules keep this loop honest: a **checkable goal**, a **hard stop**, and a
-**separate checker**. All three are wired in (the validate gate, the `8` cap, and
-the code-reviewer). See `ralph/PROMPT.md`.
+**separate checker**. All three are wired in (the validate gate, the iteration
+cap, and the code-reviewer sub-agent). See `ralph/PROMPT.md`.
 
 ## Make it yours
 
@@ -79,5 +90,10 @@ the code-reviewer). See `ralph/PROMPT.md`.
 
 ---
 
-Built for the **Claude Code Workshop**. Harness concept & demo credit:
-Cole Medin, Addy Osmani, Birgitta Böckeler. MIT-style — clone, adapt, ship.
+Built for the **Claude Code Workshop**. This is **original template code** — a
+clean re-implementation of the harness patterns, so you can license and share it
+however you like. It was *informed by*, not copied from, Cole Medin's
+[harness-engineering-demo](https://github.com/coleam00/harness-engineering-demo)
+(which ships with no license, so nothing was lifted verbatim). Concept credit:
+Cole Medin, Addy Osmani, Birgitta Böckeler, and Geoffrey Huntley (the Ralph loop).
+For the full battle-tested app + harness, clone Cole's repo directly.

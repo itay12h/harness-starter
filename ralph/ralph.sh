@@ -28,6 +28,8 @@ while [ ! -f "$DONE_FILE" ] && [ "$i" -lt "$MAX" ]; do
   echo "──────────── Ralph · iteration $i / $MAX ────────────"
   # Fresh context each round — the agent reads state from files, not chat history.
   claude -p "$(cat "$PROMPT_FILE")" || echo "(iteration exited non-zero — continuing)"
+  # Commit each iteration so every step is reversible.
+  git add -A 2>/dev/null && { git diff --cached --quiet || git commit -q -m "ralph: iteration $i" --no-verify; }
 done
 
 if [ -f "$DONE_FILE" ]; then

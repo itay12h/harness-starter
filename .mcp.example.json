@@ -1,0 +1,9 @@
+{
+  "_comment": "Example MCP servers. Copy the entries you want into .mcp.json (JSON has no comments, so this file is just a reference).",
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "."]
+    }
+  }
+}

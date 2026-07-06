@@ -1,0 +1,17 @@
+# dependencies
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# secrets — never commit these
+.env
+.env.*
+!.env.example
+
+# ralph loop state
+DONE.txt
+
+# os
+.DS_Store
